@@ -13,22 +13,11 @@ using System.Windows.Forms;
 
 namespace PaintHelper
 {
-    // TODO 1: rename variables
     class Program
     {
         public static InputSimulator simulator = new InputSimulator();
         static void Main(string[] args)
         {
-            #region getpos
-            ////get pos
-            //while (true)
-            //{
-            //    Console.WriteLine("Place Cursor Position\nPress Enter to Get Position");
-            //    Console.ReadLine();
-            //    Console.WriteLine("X = " + simulator.Mouse.Position.X.ToString() + ", Y = " + simulator.Mouse.Position.Y.ToString());
-            //}
-            #endregion
-
             if (Process.GetProcesses().Where(x => x.ProcessName.Contains("mspaint")).Count() == 0)
             {
                 //paint
@@ -39,21 +28,6 @@ namespace PaintHelper
                 };
                 Process.Start(paintProcess);
             }
-
-
-            ////snipping tool
-            //Process snippingToolProcess = new Process();
-            //snippingToolProcess.EnableRaisingEvents = true;
-            //if (!Environment.Is64BitProcess)
-            //{
-            //    snippingToolProcess.StartInfo.FileName = "C:\\Windows\\sysnative\\SnippingTool.exe";
-            //    snippingToolProcess.Start();
-            //}
-            //else
-            //{
-            //    snippingToolProcess.StartInfo.FileName = "C:\\Windows\\system32\\SnippingTool.exe";
-            //    snippingToolProcess.Start();
-            //}
 
             var selector = new Dictionary<string, Action<Action>>
             {
@@ -123,7 +97,7 @@ namespace PaintHelper
 
                         continue;
                     }
-                    Thread.Sleep(350);
+                    Thread.Sleep(500);
                     var a1 = WindowScrape.Types.HwndObject.GetWindowByTitle("Snipping Tool");
                     var x1 = a1.Location.X + 10;
                     var y1 = a1.Location.Y + 10;
@@ -340,7 +314,7 @@ namespace PaintHelper
 
                 continue;
             }
-            Thread.Sleep(350);
+            Thread.Sleep(500);
             var a = WindowScrape.Types.HwndObject.GetWindowByTitle("Snipping Tool");
             var x = a.Location.X + 10;
             var y = a.Location.Y + 10;
