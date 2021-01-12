@@ -18,6 +18,9 @@ namespace PaintHelper
         public static InputSimulator simulator = new InputSimulator();
         static void Main(string[] args)
         {
+            Console.WindowHeight = 1;
+            Console.WindowWidth = 1;
+
             if (Process.GetProcesses().Where(x => x.ProcessName.Contains("mspaint")).Count() == 0)
             {
                 //paint
