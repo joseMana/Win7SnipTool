@@ -123,7 +123,7 @@ namespace PaintHelper
 
                         continue;
                     }
-                    Thread.Sleep(350);
+                    Thread.Sleep(500);
                     var a1 = WindowScrape.Types.HwndObject.GetWindowByTitle("Snipping Tool");
                     var x1 = a1.Location.X + 10;
                     var y1 = a1.Location.Y + 10;
@@ -340,7 +340,7 @@ namespace PaintHelper
 
                 continue;
             }
-            Thread.Sleep(350);
+            Thread.Sleep(500);
             var a = WindowScrape.Types.HwndObject.GetWindowByTitle("Snipping Tool");
             var x = a.Location.X + 10;
             var y = a.Location.Y + 10;
