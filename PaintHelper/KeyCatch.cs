@@ -20,25 +20,13 @@ namespace PaintHelper
         public static void Start(Action quit)
         {
             var currentPosition = Cursor.Position;
-            new Thread(() =>
-            {
-                while(1 == 1)
-                {
-                    if (shouldPause)
-                    {
-                        DateTime startTime = DateTime.Now;
-                        while ((DateTime.Now - startTime).Seconds < pauseTime)
-                        {
-                            
-                        }
-                        shouldPause = false;
-                    }
 
-                    Thread.Sleep(1000);
-                }
-            }).Start();
             Hook.GlobalEvents().KeyPress += (sender, e) =>
             {
+                if (e.KeyChar == '0')
+                {
+                    Application.Exit();
+                }
                 if (!shouldPause)
                 {
                     currentPosition = Cursor.Position;
@@ -47,10 +35,18 @@ namespace PaintHelper
                     Cursor.Position = currentPosition;
                     simulator.Mouse.LeftButtonClick();
                     shouldPause = true;
-                }
-                if (e.KeyChar == '0')
-                {
-                    Application.Exit();
+                    new Thread(() =>
+                    {
+                        if (shouldPause)
+                        {
+                            DateTime startTime = DateTime.Now;
+                            while ((DateTime.Now - startTime).Seconds < pauseTime)
+                            {
+
+                            }
+                            shouldPause = false;
+                        }
+                    }).Start();
                 }
             };
 
