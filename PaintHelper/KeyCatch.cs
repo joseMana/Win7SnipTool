@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading;
 using Gma.System.MouseKeyHook;
 using GregsStack.InputSimulatorStandard;
+using System.Configuration;
 
 namespace PaintHelper
 {
@@ -15,6 +16,7 @@ namespace PaintHelper
         
         public static char lastCharPressed { get; set; }
         public static bool shouldPause = false;
+        public static int pauseTime = int.Parse(ConfigurationManager.AppSettings["pauseTime"]);
         public static void Start(Action quit)
         {
             var currentPosition = Cursor.Position;
@@ -25,7 +27,7 @@ namespace PaintHelper
                     if (shouldPause)
                     {
                         DateTime startTime = DateTime.Now;
-                        while ((DateTime.Now - startTime).Seconds < 6)
+                        while ((DateTime.Now - startTime).Seconds < pauseTime)
                         {
                             
                         }
