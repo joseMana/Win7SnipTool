@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using GregsStack.InputSimulatorStandard;
+using System.Drawing;
+using System.Threading;
 
 namespace PaintHelper
 {
@@ -25,6 +27,28 @@ namespace PaintHelper
                 };
                 Process.Start(paintProcess);
             }
+
+            #region Screenshot
+            Bitmap imageFromClipboard;
+            int trycounter = 0;
+            while (true)
+            {
+                Program.simulator.Keyboard.KeyPress(GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.MBUTTON | GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.DOWN);
+                Thread.Sleep(1000);
+                try
+                {
+                    imageFromClipboard = (Bitmap)Clipboard.GetImage(); break;
+                }
+                catch
+                {
+                    if (trycounter == 5)
+                        throw new Exception();
+
+                    trycounter++;
+                    continue;
+                }
+            }
+            #endregion
 
             var selector = new Dictionary<string, Action<Action>>
             {
