@@ -17,7 +17,7 @@ namespace PaintHelper
             Console.WindowHeight = 1;
             Console.WindowWidth = 1;
 
-            if (Process.GetProcesses().Where(x => x.ProcessName.Contains("mspaint")).Count() == 0)
+            if (Process.GetProcesses().Where(x => x.ProcessName.Contains("mspaint")).Count() == 1)
             {
                 //paint
                 ProcessStartInfo paintProcess = new ProcessStartInfo()
@@ -50,17 +50,6 @@ namespace PaintHelper
             }
             #endregion
 
-            var selector = new Dictionary<string, Action<Action>>
-            {
-                {"1. Log keys", KeyCatch.Start}
-            };
-            Action<Action> action = null;
-            action = selector.Where(p => p.Key.StartsWith("1"))
-                .Select(p => p.Value).FirstOrDefault();
-
-            action(Application.Exit);
-
-            Application.Run(new ApplicationContext());
         }
     }
 }
