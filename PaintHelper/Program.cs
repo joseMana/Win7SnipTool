@@ -20,7 +20,7 @@ namespace PaintHelper
         private static extern bool ShowWindow([In] IntPtr hWnd, [In] int nCmdShow);
 		public static void Main(string[] args)
 		{
-			Console.WindowHeight = 1;
+            Console.WindowHeight = 1;
 			Console.WindowWidth = 1;
 
 			foreach (var process in Process.GetProcessesByName("mspaint"))
@@ -63,13 +63,44 @@ namespace PaintHelper
 			}
 			ShowWindow(HwndObject.GetWindowByTitle("Untitled - Paint").Hwnd, 9);
 			simulator.Keyboard.ModifiedKeyStroke(VirtualKeyCode.CONTROL, VirtualKeyCode.VK_V);
+			
+			
+			//click the pencil
 			Thread.Sleep(150);
 			Point position = default(Point);
-			position.X = 334;
-			position.Y = 68;
+			position.X = 334 + 97;
+			position.Y = 68 + 35;
 			Cursor.Position = position;
 			Thread.Sleep(150);
 			simulator.Mouse.LeftButtonClick();
+
+
+			//change width of the pencil
+			position.X = 334 + 423;
+			position.Y = 68 + 35;
+			Cursor.Position = position;
+			Thread.Sleep(150);
+			simulator.Mouse.LeftButtonClick();
+
+			//select thinnest width
+			position.X = 334 + 423;
+			position.Y = 68 + 35 + 50;
+			Cursor.Position = position;
+			Thread.Sleep(150);
+			simulator.Mouse.LeftButtonClick();
+			simulator.Mouse.LeftButtonClick();
+
+			//change color to yellow
+			position.X = 334 + 660;
+			position.Y = 68 + 31;
+			Cursor.Position = position;
+			Thread.Sleep(150);
+			simulator.Mouse.LeftButtonClick();
+			simulator.Mouse.LeftButtonClick();
+
+			Cursor.Position = new Point(Screen.PrimaryScreen.Bounds.Width / 2,
+							Screen.PrimaryScreen.Bounds.Height / 2);
+
 		}
 	}
 }
