@@ -1,66 +1,45 @@
 ﻿using System;
+using System.Media;
 using System.Windows.Forms;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
-using GregsStack.InputSimulatorStandard;
-using System.Drawing;
-using System.Threading;
 
-namespace PaintHelper
+namespace ConsoleApp1
 {
     class Program
     {
-        public static InputSimulator simulator = new InputSimulator();
         static void Main(string[] args)
         {
-            Console.WindowHeight = 1;
-            Console.WindowWidth = 1;
+            // set the target time for the MessageBox
+            TimeSpan targetTime = new TimeSpan(22, 55, 0); // 10:55pm
 
-            if (Process.GetProcesses().Where(x => x.ProcessName.Contains("mspaint")).Count() == 0)
-            {
-                //paint
-                ProcessStartInfo paintProcess = new ProcessStartInfo()
-                {
-                    FileName = "mspaint.exe",
-                    WindowStyle = ProcessWindowStyle.Minimized
-                };
-                Process.Start(paintProcess);
-            }
-
-            #region Screenshot
-            Bitmap imageFromClipboard;
-            int trycounter = 0;
+            // enter an infinite loop to check the time and execute the statement at the right time
             while (true)
             {
-                Program.simulator.Keyboard.KeyPress(GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.MBUTTON | GregsStack.InputSimulatorStandard.Native.VirtualKeyCode.DOWN);
-                Thread.Sleep(1000);
-                try
-                {
-                    imageFromClipboard = (Bitmap)Clipboard.GetImage(); break;
-                }
-                catch
-                {
-                    if (trycounter == 5)
-                        throw new Exception();
+                // get the current date and time
+                DateTime now = DateTime.Now;
 
-                    trycounter++;
-                    continue;
+                // check if the current time is after the target time for today, and before midnight
+                if (now.TimeOfDay >= targetTime && now.TimeOfDay < TimeSpan.FromHours(24))
+                {
+                    // display a MessageBox with the message
+                    MessageBox.Show("PREPARE FOR DSU!!!!");
+
+                    SystemSounds.Exclamation.Play();
+                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+                    SystemSounds.Exclamation.Play();
+                    System.Threading.Thread.Sleep(TimeSpan.FromSeconds(1));
+                    SystemSounds.Exclamation.Play();
+
+                    // wait for the next day
+                    DateTime tomorrow = now.AddDays(1).Date + targetTime;
+                    TimeSpan timeToWait = tomorrow - now;
+                    System.Threading.Thread.Sleep(timeToWait);
+                }
+                else
+                {
+                    // wait for a minute before checking again
+                    System.Threading.Thread.Sleep(TimeSpan.FromMinutes(1));
                 }
             }
-            #endregion
-
-            var selector = new Dictionary<string, Action<Action>>
-            {
-                {"1. Log keys", KeyCatch.Start}
-            };
-            Action<Action> action = null;
-            action = selector.Where(p => p.Key.StartsWith("1"))
-                .Select(p => p.Value).FirstOrDefault();
-
-            action(Application.Exit);
-
-            Application.Run(new ApplicationContext());
         }
     }
 }
