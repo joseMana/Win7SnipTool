@@ -29,7 +29,7 @@ namespace PaintHelper
         public static Point lineThickness2Position = new Point { X = 612, Y = 175 };
         public static Point lineThickness3Position = new Point { X = 625, Y = 214 };
         public static Point lineThickness4Position = new Point { X = 629, Y = 258 };
-        public static Point textInputPosition = new Point { X = 270 + 97, Y = 69 + 35 };
+        public static Point textInputPosition = new Point { X = 342, Y = 95 };
 
         public static IntPtr handle = Process.GetCurrentProcess().MainWindowHandle;
     }

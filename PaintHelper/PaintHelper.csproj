@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>PaintHelper</RootNamespace>
     <AssemblyName>PaintHelper</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -52,8 +52,8 @@
     <Reference Include="Gma.System.MouseKeyHook">
       <HintPath>..\..\ConsoleApp7\packages\MouseKeyHook.5.6.0\lib\net40\Gma.System.MouseKeyHook.dll</HintPath>
     </Reference>
-    <Reference Include="GregsStack.InputSimulatorStandard, Version=1.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GregsStack.InputSimulatorStandard.1.1.1\lib\netstandard2.0\GregsStack.InputSimulatorStandard.dll</HintPath>
+    <Reference Include="GregsStack.InputSimulatorStandard, Version=1.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GregsStack.InputSimulatorStandard.1.3.5\lib\net40\GregsStack.InputSimulatorStandard.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
